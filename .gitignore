@@ -80,6 +80,7 @@ Thumbs.db
 !/tmp/storage/.keep
 
 /public/assets
+app/assets/builds/
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

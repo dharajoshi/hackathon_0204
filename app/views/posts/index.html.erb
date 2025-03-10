@@ -1,29 +1,78 @@
-<div class="grid grid-col-2" data-controller="post">
-  <div class="p-4 border rounded-md shadow-md mb-4 col-span-2">
-    <span class="text-green-500" data-post-target="welcome"></span>
-    <button data-action="click->post#Click">Browse</button>
-    <h1 class="font-bold text-center">TURBO POSTS</h1>
-    <div>Total Posts: <span id="count_post"><%= @posts.count %></span></div>
-    <%= form_with model: Post.new, data: { action: "submit->post#create" } do |f| %>
-      <div>
-        <%= f.label :title %>
-        <%= f.text_field :title, data: { post_target: "title" } %>
-        <span class="text-red-500 hidden" data-post-target="titleError">This field is required</span>
+<div class="grid grid-cols-2" data-controller="post">
+  <div class="col-span-2 mb-5 p-2">
+    <h1 class="font-bold mt-8 text-2xl">TURBO REFRESHING</h1>
+    <div class="w-full col-span-2 mx-auto mt-8 border border-2">
+      <div class="relative mb-6">
+        <h3 class="text-2xl font-bold text-gray-800">Dashboard</h3>
+        <button data-controller="frame-refresh" data-frame-refresh-ids-value='["total_users","revenues","active_sessions"]' data-action="click->frame-refresh#refresh" class="absolute top-2 right-2"><svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.651 7.65a7.131 7.131 0 0 0-12.68 3.15M18.001 4v4h-4m-7.652 8.35a7.13 7.13 0 0 0 12.68-3.15M6 20v-4h4"/></svg> Refresh All</button>
       </div>
-      <div>
-        <%= f.label :content %>
-        <%= f.text_field :content, data: { post_target: "content" } %>
-        <span class="text-red-500 hidden" data-post-target="contentError">This field is required</span>
-      </div>
-      <%= f.submit "Create" %>
-    <% end %>
-  </div>
+      <div class="grid gap-6 grid-cols-3">
+        <%= turbo_frame_tag :total_users, src: dashboards_total_users_index_path do %>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-lg font-semibold text-gray-700">
+              Totals Users
+            </h2>
+            <p class="text-2xl font-bold text-gray-900 mt-2">
+              loading...
+            </p>
+          </div>
+        <% end %>
 
-  <div id="posts" class="col-span-2">
-    <div class="col-span-1 ml-5">
-      <% @posts.each do |post| %>
-        <%= render partial: "posts/post", locals: { post: post} %>
+        <%= turbo_frame_tag :revenues, src: dashboards_revenues_index_path do %>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-lg font-semibold text-gray-700">
+              Revenue
+            </h2>
+            <p class="text-2xl font-bold text-gray-900 mt-2">
+              loading...
+            </p>
+          </div>
+        <% end %>
+
+        <%= turbo_frame_tag :active_sessions, src: dashboards_active_sessions_index_path do %>
+          <div class="bg-white p-4 rounded-lg shadow">
+            <h2 class="text-lg font-semibold text-gray-700">
+              Active Sessions
+            </h2>
+            <p class="text-2xl font-bold text-gray-900 mt-2">
+              loading...
+            </p>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-1">
+    <div class="p-4 border rounded-md shadow-md mb-4">
+      <span class="text-green-500" data-post-target="welcome"></span>
+      <button data-action="click->post#Click">Browse</button>
+      <h3 class="font-bold text-center">TURBO POSTS</h3>
+      <div>Total Posts: <span id="count_post"><%= @posts.count %></span></div>
+      <%= form_with model: Post.new, data: { action: "submit->post#create" } do |f| %>
+        <div>
+          <%= f.label :title %>
+          <%= f.text_field :title, data: { post_target: "title" } %>
+          <span class="text-red-500 hidden" data-post-target="titleError">This field is required</span>
+        </div>
+        <div>
+          <%= f.label :content %>
+          <%= f.text_field :content, data: { post_target: "content" } %>
+          <span class="text-red-500 hidden" data-post-target="contentError">This field is required</span>
+        </div>
+        <%= f.submit "Create" %>
       <% end %>
     </div>
+
+    <div id="posts" class="">
+      <div class="col-span-1 ml-5">
+        <% @posts.each do |post| %>
+          <%= render partial: "posts/post", locals: { post: post} %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="col-span-1 ml-5">
+    <%= turbo_frame_tag :post_details %>
   </div>
 </div>
