@@ -1,0 +1,13 @@
+<%= turbo_frame_tag "analytics" do %>
+  <%= turbo_stream_from "analytics" %>
+
+  <div class="p-6 bg-white rounded shadow-md">
+    <h2 class="text-2xl font-bold mb-4">Article Analytics</h2>
+
+    <ul class="space-y-2 text-lg">
+      <li>Total Articles: <strong><%= @total_articles %></strong></li>
+      <li>Read Articles: <strong class="text-green-600"><%= @read_articles %></strong></li>
+      <li>Unread Articles: <strong class="text-red-600"><%= @unread_articles %></strong></li>
+    </ul>
+  </div>
+<% end %>

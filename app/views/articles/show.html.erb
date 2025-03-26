@@ -1,0 +1,8 @@
+<%= turbo_frame_tag "show_articles" do %>
+  <h1 class="font-bold">DETAILS OF <%= @article.title %></h1>
+  <%= turbo_stream.replace "article_read_#{@article.id}" do %>
+    <p>read</>
+  <% end %>
+  <h2><%= @article.title %></h2>
+  <p><%= @article.content %></p>
+<% end %>

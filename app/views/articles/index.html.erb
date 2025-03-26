@@ -1,0 +1,21 @@
+<div>
+  <h1 class="text-2xl font-bold" id="article">Articles</h1>
+  <%= link_to "Go To Analytics Page", analytics_path, class: "text-green-900", data: { turbo: false } %>
+  <%= turbo_stream_from "articles" %>
+  <div>Total Articles: <span id="article_count"><%= @articles.count %></span></div>
+
+  <%= turbo_frame_tag "article_form" do %>
+    <%= render 'form', article: @article %>
+  <% end %>
+
+  <div id="articles-list" class="">
+    <div class="ml-5">
+      <% @articles.each do |article| %>
+        <%= render partial: "articles/article", locals: { article: article} %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="ml-8 mt-8">
+  <%= turbo_frame_tag "show_articles" %>
+</div>

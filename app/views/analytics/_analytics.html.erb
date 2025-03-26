@@ -1,0 +1,7 @@
+<%= turbo_stream.replace "analytics" do %>
+  <%= render partial: "analytics/analytics", locals: {
+    total_articles: total_articles,
+    read_articles: read_articles,
+    unread_articles: unread_articles
+  } %>
+<% end %>

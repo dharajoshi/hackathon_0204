@@ -1,0 +1,18 @@
+<%= turbo_frame_tag dom_id(article, "id") do %>
+  <div class="p-4 border rounded-md shadow-md mb-4 bg-white transition-colors duration-300" data-controller="animation" data-action="click->animation#changeColor">
+    <%= link_to article, "data-turbo-prefetch": false, "data-turbo-frame": :show_articles, class: "" do %>
+      <h2 class="text-xl font-bold"><%= article.title %></h2>
+      <p class="text-gray-700"><%= article.content %></p>
+      <p id="article_read_<%= article.id %>">
+        <% if article.read? %>
+          Read
+        <% else %>
+          New
+        <% end %>
+      </p>
+      <p data-animation-target="message" class="text-green-600 font-medium"></p>
+    <% end %>
+    <%= button_to "Delete", article_path(article), method: :delete, class: "text-red-500" %>
+  </div>  
+  <%= link_to "Edit", edit_article_path(article), data: { turbo_stream: true } %>
+<% end %>
