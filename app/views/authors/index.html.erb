@@ -1,0 +1,32 @@
+<div data-controller="authors">
+  <span class="text-green-500" data-post-target="authorswelcome"></span>
+  <div>Total Authors: <span id="count_post"><%= @authors.count %></span></div>
+  <%= form_with model: Author.new, data: { action: "submit->post#create" } do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, required: true %>
+      <span class="text-red-500 hidden" data-post-target="titleName">This field is required</span>
+    </div>
+    <div>
+      <%= form.label :email %>
+      <%= form.email_field :email, required: true %>
+      <span class="text-red-500 hidden" data-post-target="titleEmail">This field is required</span>
+    </div>
+    <div>
+      <%= form.submit "Create Author" %>
+    </div>
+  <% end %>
+  <hr>
+  <h1>List of Authors</h1>
+  <div id="posts" class="">
+    <div class="col-span-1 ml-5">
+      <ul>
+        <% @authors.each do |author| %>
+          <li data-action="click->authors#showDetails" data-author-id="<%= author.id %>">
+            <%= author.name %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

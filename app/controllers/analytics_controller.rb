@@ -5,3 +5,4 @@ class AnalyticsController < ApplicationController
     @unread_articles = Article.where(read: false).count
   end
 end
+

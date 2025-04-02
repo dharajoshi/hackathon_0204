@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :articles
   resources :analytics
   resources :posts
+  resources :authors
+  resources :task_managers
   namespace :dashboards do
     get 'active_sessions/index'
     get 'revenues/index'
@@ -15,5 +17,6 @@ Rails.application.routes.draw do
   end
 
   # Defines the root path route ("/")
-  root "articles#index"
+  # root "articles#index"
+  root "task_managers#index"
 end

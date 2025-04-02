@@ -1,0 +1,12 @@
+<%= turbo_frame_tag "task_managers_analytics" do %>
+  <div class="p-6 bg-white rounded shadow-md" id="task_managers-list">
+    <h2 class="text-2xl font-bold mb-4">Task Manager Analytics</h2>
+    
+    <ul class="space-y-2 text-lg">
+      <li>Total Task Managers: <strong><%= total_task_managers_count %></strong></li>
+      <li>Read Articles: <strong class="text-green-600"><%= TaskManager.where(status: 'completed').count %></strong></li>
+      <li>Unread Articles: <strong class="text-red-600"><%= TaskManager.where(status: 'to_do').count %></strong></li>
+    </ul> 
+  </div>
+<% end %>
+

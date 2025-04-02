@@ -1,0 +1,5 @@
+<%= turbo_frame_tag :task_manager_details do %>
+  <div class="flex"><span class="font-bold">Title: </span><span> <%= @task_manager.title %></span></div>
+  <div class="flex"><span class="font-bold">Description: </span><span> <%= @task_manager.description %></span></div>
+  <div class="flex"><span class="font-bold">Status: </span><span> <%= @task_manager.status %></span></div>
+<% end %>

@@ -1,0 +1,28 @@
+<div data-controller="task_manager">
+  <% if @task_manager&.new_record? %>
+    <%= link_to 'Show Form', '#', data: { action: "click->task_manager#showForm" } %>
+  <% end %>
+  <div class="<%= @task_manager&.new_record? ? 'hidden' : '' %> mt-4" data-task_manager-target="form">
+    <%= form_with model: @task_manager, data: { action: "submit->task_manager#create" } do |form| %>
+      <div class="field">
+        <%= form.label :title %>
+        <%= form.text_field :title, name: "task_manager[title]", data: { task_manager_target: "title" } %>
+        <span class="text-red-500 hidden" data-task_manager-target="titleError">This field is required</span>
+      </div>
+
+      <div class="field">
+        <%= form.label :description %>
+        <%= form.text_area :description, name: "task_manager[description]", data: { task_manager_target: "description" } %>
+        <span class="text-red-500 hidden" data-task_manager-target="descriptionError">This field is required</span>
+      </div>
+
+      <div class="field">
+        <%= form.label :status %>
+        <%= form.select "task_manager[status]", [["To Do", "to_do"], ["In Progress", "in_progress"], ["Completed", "completed"]], {}, data: { task_manager_target: "status" } %>
+        <span class="text-red-500 hidden" data-task_manager-target="statusError">This field is required</span>
+      </div>
+
+      <%= form.submit "Save" %>
+    <% end %>
+  </div>
+</div>

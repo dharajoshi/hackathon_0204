@@ -1,0 +1,39 @@
+<div class="grid grid-cols-2" data-controller="task-manager">
+  <%= turbo_stream_from "task_managers" %>
+  <div>Total Task Managers: <span id="task_manager_count"><%= @task_managers.count %></span></div> 
+
+  <h1>Task Manager</h1>
+
+  <div>
+    <%= turbo_frame_tag "task_manager_form" do %>
+      <%= render 'form', task_manager: @task_manager %>
+    <% end %>
+  </div>
+
+  <div class="">
+    <h2>Task List</h2>
+    <div id="show-counts">
+      <%= render partial: 'task_managers/index', locals: { total_task_managers_count: @total_task_managers, completed_task_managers: @completed_task_managers, pending_task_managers: @pending_task_managers } %>
+    </div>
+    <br>
+    <div data-task-manager-target="taskList">
+      <% @task_managers.each do |task_manager| %>
+
+        <%= turbo_frame_tag dom_id(task_manager, "id") do %>
+          <div class="p-4 border rounded-md shadow-md mb-4">
+            <%= link_to task_manager, "data-turbo-prefetch": false, "data-turbo-frame": :task_manager_details, class: "" do %>
+              <h2 class="text-xl font-bold"><%= task_manager.title %></h2>
+              <p class="text-gray-700"><%= task_manager.description %></p>
+              <p class="text-gray-700"><%= task_manager.status %></p>
+              <p><%= button_to "Remove Task Manager", task_manager_path(task_manager), method: :delete, class: "text-red-500" %></p>
+            <% end %>
+          </div>  
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="col-span-1 ml-5">
+    <%= turbo_frame_tag :task_manager_details %>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<%= form_with model: @author, url: authors_path, local: false do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+  </div>
+  <div>
+    <%= form.label :email %>
+    <%= form.email_field :email, required: true %>
+  </div>
+  <div>
+    <%= form.submit "Create Author" %>
+  </div>
+<% end %>
