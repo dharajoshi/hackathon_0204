@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-bold mb-4">Task Manager Analytics</h2>
     
     <ul class="space-y-2 text-lg">
-      <li>Total Task Managers: <strong><%= total_task_managers_count %></strong></li>
+      <li>Total Task Managers: <strong><%= TaskManager.count %></strong></li>
       <li>Read Articles: <strong class="text-green-600"><%= TaskManager.where(status: 'completed').count %></strong></li>
       <li>Unread Articles: <strong class="text-red-600"><%= TaskManager.where(status: 'to_do').count %></strong></li>
     </ul> 
